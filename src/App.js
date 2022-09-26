@@ -1,5 +1,6 @@
-import React from 'react';
+import React, {useState} from 'react';
 import Timer from './component/Timer';
+import Input from './component/Input';
 import './App.css'
 
 const App = () => {
@@ -7,6 +8,7 @@ const App = () => {
     <>
         <Timer />
         <Timer />
+        <Input />
     </>
 );
 };
