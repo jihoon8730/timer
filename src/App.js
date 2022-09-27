@@ -1,21 +1,13 @@
-import React, {useState} from 'react';
-import Timer from './component/Timer';
-import Input from './component/Input';
-import './App.css'
+import React from "react";
+import Timer from "./component/Timer";
+import "./App.css";
 
 const App = () => {
-    return (
+  return (
     <>
-        <Timer />
-        <Timer />
-        <Input />
+      <Timer />
     </>
-);
+  );
 };
 
 export default App;
-
-
-
-
-

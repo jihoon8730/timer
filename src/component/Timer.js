@@ -1,168 +1,94 @@
-import { useState, useEffect} from 'react';
-import Input from './Input';
-import './Timer.css'
+import { useState } from "react";
+import Input from "./Input";
+import TimerView from "./TimerView";
+import "./Timer.css";
 
-function Timer(props) {
+function Timer() {
+  const [hour, setHour] = useState(0);
+  const [min, setMin] = useState(0);
+  const [sec, setSec] = useState(0);
 
-  console.log(props);
+  const [firstTimerViewHour, setFirstTimerViewHour] = useState(0);
+  const [firstTimerViewMin, setFirstTimerViewMin] = useState(0);
+  const [firstTimerViewSec, setFirstTimerViewSec] = useState(0);
 
+  const [secondTimerViewHour, setSecondTimerViewHour] = useState(0);
+  const [secondTimerViewMin, setSecondTimerViewMin] = useState(0);
+  const [secondTimerViewSec, setSecondTimerViewSec] = useState(0);
 
-  const [hour, setHour] = useState('');
-  const [min, setMin] = useState('');
-  const [sec, setSec] = useState('');
+  const [onClickRadio, setOnClickRadio] = useState("1");
 
-  const [viewHour, setViewHour] = useState(0);
-  const [viewMin,setViewMin] = useState('0');
-  const [viewSec, setViewSec] = useState('0');
-  
-  const [offInput, setOffInput] = useState(false);
+  const handleRadioButton = (e) => {
+    setOnClickRadio(e.target.value);
+  };
 
-
-  let tempSec = parseInt(viewSec);
-  let tempMin = parseInt(viewMin);
-  let tempHour = parseInt(viewHour);
-  
-
-  const onHourChange = (e, time, comment) => {
-    if (e.target.value.length > 2) {
-      e.target.value = e.target.value.substr(0, 2);
-    } else if (e.target.value > time) {
-      alert(`${comment}를 초과할 수 없습니다`);
-      e.preventDefault();
-    }
-    setHour(e.target.value);
-  }
-
-  const onMinChange = (e, time, comment) => {
-    if (e.target.value.length > 2) {
-      e.target.value = e.target.value.substr(0, 2);
-    } else if (e.target.value > time) {
-      alert(`${comment}를 초과할 수 없습니다`);
-      e.preventDefault();
-    }
-    setMin(e.target.value);
-  }
-
-  const onSecChange = (e, time, comment) => {
-    if (e.target.value.length > 2) {
-      e.target.value = e.target.value.substr(0, 2);
-    } else if (e.target.value > time) {
-      alert(`${comment}를 초과할 수 없습니다`);
-      e.preventDefault();
-    }
-    setSec(e.target.value);
-  }
-
-  useEffect(() => {
-      console.log(hour, min, sec)
-  } ,[hour, min, sec])
-
-  const handleViewClick = () => {
-    setViewHour(hour);
-    setViewMin(min); 
-    setViewSec(sec); 
-  }
-
-  const onClickCount = () => {
-      let timer = setInterval(() => {
-        if (tempSec > 0) {
-          setViewSec(tempSec -= 1);
-        } else if (tempSec === 0) {
-          setViewSec(tempSec = 59);
-          setViewMin(tempMin -=1);
-        } 
-        if (tempMin === -1) {
-          setViewHour(tempHour -= 1);
-          setViewMin(tempMin = 59);
-        }
-        if (tempSec <= 0) {
-          if (tempMin <= 0) {
-            if (tempHour <= 0) {
-              clearInterval(timer);
-            }
-          }
-        }
-      }, 1000)
-  }
-
-  const onCheckInput = (event) => {
-    if (!sec) {
-      alert('초 입력');
-      event.preventDefault();
-    } else if (!min) {
-      alert('분 0 입력');
-      event.preventDefault();
-    } else if (!hour) {
-      alert('시 0 입력');
-      event.preventDefault();
-    }
-  }
-
-  const onClickCancel = () => {
-    setHour('');
-    setMin('');
-    setSec('');
-    setViewHour('0');
-    setViewMin('0');
-    setViewSec('0');
-    setOffInput(false);
-  }
-
-  const onClickStartCount = () => {
-    setOffInput(true);
-  }
-  
   return (
-      <div className='wrap'>
-        <div className='box'>
-        <div className='view'>{viewHour} : {viewMin} : {viewSec}</div>
-          <div className={offInput === true ?  'input-box-togle' : 'input-box'}>
-              <input 
-              className='input-item' 
-              type="number" 
-              placeholder='H'
-              value={hour}
-              min='0'
-              max='99'
-              onChange={e => onHourChange(e, 99, '99')}
-              />
-              <input 
-              className='input-item' 
-              type="number" 
-              placeholder='M'
-              value={min}
-              min='0'
-              max='59'
-              onChange={e => onMinChange(e, 59, '59')}
-              />
-              <input 
-              className='input-item' 
-              type="number" 
-              placeholder='S'
-              value={sec}
-              min='0'
-              max='59'
-              onChange={e => onSecChange(e, 59, '59')}
-              />
-          </div>
-          <div className={offInput === true ? 'start-btn-box' : ''}>
-            <button className='btn-input' onClick={() => {
-              onCheckInput()
-              handleViewClick()
-            }}>입력</button>
-            <button className='btn-start' onClick={() => {
-              onCheckInput()
-              onClickCount()
-              onClickStartCount()
-            }}>시작</button>
-          </div>
-          <div className={offInput === true ?  '' : 'btn-cancel-box'}>
-            <button className='btn-cancel' onClick={onClickCancel}>취소</button>
-          </div>
+    <div className="wrap">
+      <div className="box">
+        <TimerView
+          timerViewHour={firstTimerViewHour}
+          timerViewMin={firstTimerViewMin}
+          timerViewSec={firstTimerViewSec}
+        />
+        <TimerView
+          timerViewHour={secondTimerViewHour}
+          timerViewMin={secondTimerViewMin}
+          timerViewSec={secondTimerViewSec}
+        />
       </div>
+      <div className="input-box">
+        <div className="radios">
+          <input
+            type="radio"
+            value="1"
+            checked={onClickRadio === "1"}
+            onChange={handleRadioButton}
+          />
+          <input
+            type="radio"
+            value="2"
+            checked={onClickRadio === "2"}
+            onChange={handleRadioButton}
+          />
+        </div>
+
+        <div className="input-view">
+          <Input
+            sec={sec}
+            setSec={setSec}
+            min={min}
+            setMin={setMin}
+            hour={hour}
+            setHour={setHour}
+            setTimerViewHour={
+              onClickRadio === "1"
+                ? setFirstTimerViewHour
+                : setSecondTimerViewHour
+            }
+            setTimerViewMin={
+              onClickRadio === "1"
+                ? setFirstTimerViewMin
+                : setSecondTimerViewMin
+            }
+            setTimerViewSec={
+              onClickRadio === "1"
+                ? setFirstTimerViewSec
+                : setSecondTimerViewSec
+            }
+            timerViewSec={
+              onClickRadio === "1" ? firstTimerViewSec : secondTimerViewSec
+            }
+            timerViewMin={
+              onClickRadio === "1" ? firstTimerViewMin : secondTimerViewMin
+            }
+            timerViewHour={
+              onClickRadio === "1" ? firstTimerViewHour : secondTimerViewHour
+            }
+          />
+        </div>
       </div>
-      
-  )
+    </div>
+  );
 }
 
 export default Timer;

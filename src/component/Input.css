@@ -1,0 +1,91 @@
+.Input {
+  margin-left: 25px;
+}
+
+.input-box {
+  margin-top: 30px;
+}
+
+.input-box-togle {
+  display: none;
+}
+
+.input-item {
+  margin-right: 20px;
+  width: 50px;
+  height: 30px;
+  border: 0px;
+  border-radius: 5px;
+  font-size: 20px;
+  text-align: center;
+  background-color: rgb(177, 194, 248);
+  color: #fff;
+}
+
+.radios-none {
+  display: none;
+}
+
+.start-btn {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+}
+
+.start-btn-box {
+  display: none;
+}
+
+.btn-input {
+  margin-top: 20px;
+  padding: 5px 10px;
+  background-color: rgb(249, 185, 108);
+  color: #fff;
+  border: 0.5px solid rgb(235, 235, 235);
+  border-radius: 5px;
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.btn-start {
+  margin-top: 20px;
+  margin-right: 15px;
+  padding: 5px 10px;
+  background-color: rgb(249, 185, 108);
+  color: #fff;
+  border: 0.5px solid rgb(237, 236, 236);
+  border-radius: 5px;
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.btn-cancel {
+  margin-top: 50px;
+  padding: 5px 30px;
+  border: 1px solid rgb(238, 238, 238);
+  border-radius: 5px;
+  background-color: rgb(243, 136, 136);
+  color: #fff;
+  font-size: 15px;
+  font-weight: 700;
+}
+
+.btn-cancel-box {
+  display: none;
+}
+
+.stop-color {
+  background-color: rgb(155, 208, 155);
+}
+
+.stop-color-none {
+  display: none;
+}
+
+.restart-color {
+  background-color: rgb(247, 164, 246);
+}
+
+.restart-color-none {
+  display: none;
+}
