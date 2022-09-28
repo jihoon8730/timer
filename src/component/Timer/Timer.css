@@ -1,0 +1,19 @@
+.wrap {
+  margin: 0px auto;
+  width: 1200px;
+  text-align: center;
+  margin-top: 100px;
+}
+
+.box {
+  display: flex;
+  justify-content: center;
+  gap: 100px;
+}
+
+.input-view {
+  margin-top: 200px;
+  display: flex;
+  justify-content: center;
+  gap: 160px;
+}
