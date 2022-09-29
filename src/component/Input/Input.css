@@ -73,3 +73,15 @@
 .restart-color-none {
   display: none;
 }
+
+.delete-btn {
+  margin-right: 15px;
+  border-radius: 5px;
+  border: 0px;
+  padding: 10px;
+  background-color: rgb(188, 132, 240);
+  color: #fff;
+  font-size: 20px;
+  font-weight: 700;
+  text-align: center;
+}

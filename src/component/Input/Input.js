@@ -1,21 +1,22 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import "./Input.css";
 
-function Input({ sec, setSec, min, setMin, hour, setHour, closeMent }) {
+function Input({
+  sec,
+  setSec,
+  min,
+  setMin,
+  hour,
+  setHour,
+  closeMent,
+  timerDelete,
+}) {
   const [offInput, setOffInput] = useState(false);
   const [restartAndstop, setRestartAndStop] = useState(false);
 
-  // undefind 방지
-  const tempHour = hour ? parseInt(hour) : 0;
-  const tempMin = min ? parseInt(min) : 0;
-  const tempSec = sec ? parseInt(sec) : 0;
-
-  const initialTime = tempHour * 60 * 60 + tempMin * 60 + tempSec;
+  const initialTime =
+    parseInt(hour) * 60 * 60 + parseInt(min) * 60 + parseInt(sec);
   const interval = useRef(null);
-  useEffect(() => {
-    console.log(initialTime);
-  }, [initialTime]);
-
   const onHourChange = (e, time, comment) => {
     let { value } = e.target;
     if (value.length > 2) {
@@ -50,17 +51,24 @@ function Input({ sec, setSec, min, setMin, hour, setHour, closeMent }) {
     setSec(value);
   };
 
+  useEffect(() => {}, []);
+
   let calc = initialTime;
   const onClickCount = () => {
     interval.current = setInterval(() => {
       calc = calc - 1;
       setSec(calc % 60, 2);
-      setMin(parseInt((calc / 60) % 60), 2);
-      setHour(parseInt(calc / 60 / 60), 2);
+      setMin(parseInt((calc / 60) % 60));
+      setHour(parseInt(calc / 60 / 60));
+      console.log("타이머 돌아가는 중");
       if (calc <= 0) {
         alert(closeMent);
         clearInterval(interval.current);
       }
+      return () => {
+        clearInterval(interval.current);
+        console.log("타이머가 종료되었습니다");
+      };
     }, 1000);
   };
 
@@ -154,6 +162,15 @@ function Input({ sec, setSec, min, setMin, hour, setHour, closeMent }) {
           재개
         </button>
       </div>
+      <button
+        className="delete-btn"
+        onClick={() => {
+          timerDelete();
+          clearInterval(interval.current);
+        }}
+      >
+        제거
+      </button>
     </div>
   );
 }
